@@ -5,14 +5,13 @@ import {
   IconButton,
   Button as MaterialButton,
   Pressable,
-  TextInput,
   Divider,
 } from "@react-native-material/core";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
 import tw from "twrnc";
-import { Button } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 import LoginSvg from "../../assets/loginSvg.svg";
 import { LinearGradient } from "expo-linear-gradient";
 import { ImageBackground } from "react-native";
@@ -56,53 +55,36 @@ const LoginScreen = () => {
         </View>
         <View className="w-full flex items-center justify-center p-4">
           <TextInput
-            theme={{ roundness: 20 }}
+            theme={{ roundness: 30 }}
             placeholder="Email"
-            style={tw.style("w-11/12 my-2 rounded-lg", {
-              borderRadius: 20,
-            })}
-            leading={(props) => <Icon name="at" {...props} color="#4577a967" />}
-            variant="outlined"
+            style={tw.style("w-11/12 my-2 px-2 rounded-lg bg-white")}
+            left={<TextInput.Icon icon="at" color="#4577a967" />}
+            mode="outlined"
           />
           <TextInput
-            inputStyle={tw.style("rounded-xl overflow-hidden")}
-            inputContainerStyle={tw.style("overflow-hidden")}
+            theme={{ roundness: 30 }}
             placeholder="Password"
             secureTextEntry={secureTextEntry}
-            style={tw.style("w-11/12 mb-2 rounded-xl")}
-            leading={(props) => (
-              <Feather name="lock" {...props} color="#4577a960" />
-            )}
-            trailing={(props) => (
-              <>
-                {secureTextEntry ? (
-                  <IconButton
-                    icon={(props) => (
-                      <Ionicons
-                        name="ios-eye-outline"
-                        {...props}
-                        color="#4577a9"
-                      />
-                    )}
-                    {...props}
-                    onPress={() => setSecureTextEntry(false)}
-                  />
-                ) : (
-                  <IconButton
-                    icon={(props) => (
-                      <Ionicons
-                        name="ios-eye-off-outline"
-                        {...props}
-                        color="#4577a9"
-                      />
-                    )}
-                    {...props}
-                    onPress={() => setSecureTextEntry(true)}
-                  />
-                )}
-              </>
-            )}
-            variant="outlined"
+            style={tw.style("w-11/12 mb-2 px-2 bg-white")}
+            left={
+              <TextInput.Icon icon="lock-closed-outline" color="#4577a960" />
+            }
+            right={
+              secureTextEntry ? (
+                <TextInput.Icon
+                  icon="eye-outline"
+                  color="#2a4563d2"
+                  onPress={() => setSecureTextEntry(false)}
+                />
+              ) : (
+                <TextInput.Icon
+                  icon="eye-off-outline"
+                  color="#2a4563d2"
+                  onPress={() => setSecureTextEntry(true)}
+                />
+              )
+            }
+            mode="outlined"
           />
           <Pressable
             style={tw.style("mb-4 w-4/5 px-2")}
@@ -118,7 +100,7 @@ const LoginScreen = () => {
           </Pressable>
           <Button
             mode="contained"
-            style={tw.style("w-4/5 mt-2 h-12 rounded-xl")}
+            style={tw.style("w-4/5 mt-2 h-12 rounded-full")}
             contentStyle={tw.style("h-full")}
             color="#e09467"
             labelStyle={tw.style("text-lg text-white")}
@@ -132,28 +114,34 @@ const LoginScreen = () => {
             <Text className="px-4 text-lg font-bold text-gray-600">Or</Text>
             <Divider style={tw.style("w-5/12")} />
           </View>
-          <Button
+          <MaterialButton
             mode="contained"
-            style={tw.style("w-4/5 mt-10 h-12 rounded-xl")}
-            contentStyle={tw.style("h-full")}
-            icon="google"
+            style={tw.style("w-4/5 mt-10 p-0")}
+            contentContainerStyle={tw.style("p-2 w-full h-12")}
+            leading={(props) => (
+              <Icon
+                name="google"
+                {...props}
+                style={tw.style("text-blue-800")}
+              />
+            )}
             color="white"
-            labelStyle={tw.style("text-lg text-blue-500")}
+            titleStyle={tw.style("text-lg text-blue-800")}
             uppercase={false}
-          >
-            Sign in with Google
-          </Button>
-          <Button
+            title="Signup with Gmail"
+          />
+          <MaterialButton
             mode="contained"
             style={tw.style("w-4/5 mt-4 h-12")}
-            contentStyle={tw.style("h-full")}
-            icon="facebook"
+            contentContainerStyle={tw.style("p-2 w-full h-12")}
             color="#268ceb"
-            labelStyle={tw.style("text-lg text-white")}
+            titleStyle={tw.style("text-lg text-white")}
+            leading={(props) => (
+              <Icon name="facebook" {...props} color="white" />
+            )}
             uppercase={false}
-          >
-            Sign in with Facebook
-          </Button>
+            title="Signup with Facebook"
+          />
           <View className="w-full flex flex-row mt-24 justify-center">
             <Text className="my-auto text-lg text-gray-700">
               Doesn't have an account?

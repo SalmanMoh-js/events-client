@@ -11,6 +11,7 @@ import LoginScreen from "./login";
 import FirstScreen from "./firstScreen";
 import Announcments from "./Announcements";
 import SignupScreen from "./signUp";
+import HelpScreen from "./help";
 
 const Stack = createStackNavigator();
 const config = {
@@ -62,6 +63,11 @@ export default function AuthStack({ navigation }) {
       <Stack.Screen
         name="Announcements"
         component={Announcments}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Help"
+        component={HelpScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

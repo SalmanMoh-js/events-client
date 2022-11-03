@@ -4,14 +4,22 @@ import "react-native-gesture-handler";
 import {
   createStackNavigator,
   TransitionPresets,
+  TransitionSpecs,
+  HeaderStyleInterpolators,
 } from "@react-navigation/stack";
 import { useDispatch } from "react-redux";
 import BottomTab from "./bottomTab";
 import LoginScreen from "./login";
 import FirstScreen from "./firstScreen";
-import Announcments from "./Announcements";
 import SignupScreen from "./signUp";
 import HelpScreen from "./help";
+import CategoryEventScreen from "./categoryEvent";
+import EditProfileScreen from "./editProfileScreen";
+import ChangePasswordScreen from "./changePasswordScreen";
+import Ticket from "./ticket";
+import SearchScreen from "./searchScreen";
+import Event from "./event";
+import PurchaseTicketScreen from "./purchaseTicket";
 
 const Stack = createStackNavigator();
 const config = {
@@ -30,6 +38,13 @@ const closeConfig = {
   config: {
     duration: 300,
     easing: Easing.linear,
+  },
+};
+const MyTransition = {
+  gestureDirection: "horizontal",
+  transitionSpec: {
+    open: TransitionSpecs.RevealFromBottomAndroidSpec,
+    close: TransitionSpecs.FadeOutToBottomAndroidSpec,
   },
 };
 export default function AuthStack({ navigation }) {
@@ -61,8 +76,49 @@ export default function AuthStack({ navigation }) {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Announcements"
-        component={Announcments}
+        name="Catagory Event"
+        component={CategoryEventScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
+        }}
+      />
+      <Stack.Screen
+        name="Event"
+        component={Event}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Ticket"
+        component={Ticket}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.ModalPresentationIOS,
+        }}
+      />
+      <Stack.Screen
+        name="Purchase Ticket"
+        component={PurchaseTicketScreen}
+        options={{
+          headerShown: false,
+          ...TransitionPresets.ModalPresentationIOS,
+        }}
+      />
+      <Stack.Screen
+        name="Edit Profile"
+        component={EditProfileScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Change Password"
+        component={ChangePasswordScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen

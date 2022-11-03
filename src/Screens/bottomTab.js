@@ -12,6 +12,7 @@ import Entypo from "@expo/vector-icons/Entypo";
 import HomeScreen from "./homeScreen";
 import Profile from "./profile";
 import SearchScreen from "./searchScreen";
+import MyTicketsScreen from "./myTicketsScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -32,11 +33,11 @@ export default function BottomTab() {
         }}
       />
       <Tab.Screen
-        name="Search"
-        component={SearchScreen}
+        name="My Tickets"
+        component={MyTicketsScreen}
         options={{
           tabBarIcon: (props) => (
-            <Ionicons name="ios-search-outline" size={20} {...props} />
+            <Ionicons name="receipt-outline" size={20} {...props} />
           ),
         }}
       />

@@ -57,11 +57,11 @@ const SignupScreen = () => {
           >
             Lets Get Started!
           </Text>
-          <Text className="text-2xl text-gray-500 text-center mt-3">
+          <Text className="text-2xl text-gray-500 text-center mt-1">
             Create an account to get all the features
           </Text>
         </View>
-        <View className="w-full flex items-center justify-center p-4">
+        <View className="w-full flex items-center justify-center px-4 py-0">
           <TextInput
             theme={{ roundness: 30 }}
             placeholder="Name"
@@ -69,6 +69,13 @@ const SignupScreen = () => {
             left={
               <TextInput.Icon icon="ios-person-outline" color="#4577a967" />
             }
+            mode="outlined"
+          />
+          <TextInput
+            theme={{ roundness: 30 }}
+            placeholder="Email"
+            style={tw.style("w-11/12 mb-3 px-2 rounded-lg bg-white")}
+            left={<TextInput.Icon icon="at" color="#4577a967" />}
             mode="outlined"
           />
           <PhoneInput
@@ -137,7 +144,7 @@ const SignupScreen = () => {
           </View>
           <MaterialButton
             mode="contained"
-            style={tw.style("w-4/5 mt-10 p-0")}
+            style={tw.style("w-4/5 mt-6 p-0")}
             contentContainerStyle={tw.style("p-2 w-full h-12")}
             leading={(props) => (
               <Icon
@@ -163,7 +170,7 @@ const SignupScreen = () => {
             uppercase={false}
             title="Signup with Facebook"
           />
-          <View className="w-full flex flex-row mt-14 justify-center">
+          <View className="w-full flex flex-row mt-6 justify-center">
             <Text className="my-auto text-lg text-gray-700">
               Already have an account?
             </Text>

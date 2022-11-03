@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, ScrollView, Dimensions } from "react-native";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import tw from "twrnc";
 import HomeScreenHeader from "../Components/homeScreenHeader";
 import { Chip, Surface } from "@react-native-material/core";
@@ -22,8 +22,9 @@ const renderBanner = ({ item, index }) => {
   return <BannerSlider data={item} />;
 };
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const refRBSheet = useRef();
+  const scrollView = useRef(null);
   const events = [
     {
       id: 1,
@@ -90,10 +91,19 @@ const HomeScreen = () => {
       desc: "Description",
     },
   ];
+  useEffect(() => {
+    const scrollToTop = navigation.addListener("tabPress", (e) => {
+      scrollView.current.scrollTo({ x: 5, y: 5, animated: true });
+    });
+  }, []);
   return (
     <SafeAreaView className="w-full h-full bg-gray-100">
       <HomeScreenHeader />
-      <ScrollView className="w-full p-3 bg-transparent">
+      <ScrollView
+        className="w-full p-3 bg-transparent"
+        scrollsToTop={true}
+        ref={scrollView}
+      >
         <View
           style={tw.style(
             "mx-auto p-3 w-full flex justify-center items-center"
@@ -124,7 +134,7 @@ const HomeScreen = () => {
             onPress={() => refRBSheet.current.open()}
           />
         </View>
-        <ScrollView className="w-full">
+        <ScrollView className="w-full pb-6">
           {events.map((event, index) => {
             return <EventListItem event={event} key={index} />;
           })}
@@ -148,7 +158,7 @@ const HomeScreen = () => {
         }}
         height={350}
       >
-        <Filter refRBSheet={refRBSheet.current} />
+        <Filter />
       </RBSheet>
     </SafeAreaView>
   );

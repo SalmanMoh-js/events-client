@@ -22,12 +22,9 @@ import {
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { FAB, Searchbar } from "react-native-paper";
 import { ScrollView } from "react-native";
-import RBSheet from "react-native-raw-bottom-sheet";
-import Filter from "../Components/filter";
 import EventListItem from "../Components/eventListItem";
 
 const SearchScreen = ({ navigation }) => {
-  const refRBSheet = useRef();
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [scrolling, setScrolling] = useState("");
@@ -115,6 +112,10 @@ const SearchScreen = ({ navigation }) => {
       <Surface
         style={tw`mx-auto bg-white w-full px-2 py-3 flex flex-row justify-between`}
       >
+        <IconButton
+          icon={(props) => <Icon name="arrow-left" {...props} size={26} />}
+          onPress={() => navigation.goBack()}
+        />
         <Searchbar
           style={tw.style("shadow-none border border-gray-300", {
             width: "87%",
@@ -127,10 +128,6 @@ const SearchScreen = ({ navigation }) => {
           value={searchQuery}
           autoFocus
         />
-        <IconButton
-          icon={(props) => <Icon name="tune-variant" {...props} size={26} />}
-          onPress={() => refRBSheet.current.open()}
-        />
       </Surface>
       <Surface style={tw`mx-auto bg-transparent w-full h-full`}>
         <ScrollView style={tw`mx-auto my-1 bg-transparent w-full mb-16 px-3`}>
@@ -139,26 +136,6 @@ const SearchScreen = ({ navigation }) => {
           })}
         </ScrollView>
       </Surface>
-      <RBSheet
-        ref={refRBSheet}
-        closeOnDragDown={true}
-        closeOnPressMask={true}
-        customStyles={{
-          wrapper: {
-            backgroundColor: "#6e6d6d23",
-          },
-          draggableIcon: {
-            backgroundColor: "#948d8d",
-          },
-          container: {
-            borderRadius: 30,
-            elevation: 50,
-          },
-        }}
-        height={350}
-      >
-        <Filter refRBSheet={refRBSheet.current} />
-      </RBSheet>
     </SafeAreaView>
   );
 };

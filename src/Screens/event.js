@@ -48,7 +48,14 @@ const Event = ({ route }) => {
     };
     try {
       const res = await axios.get(`${URL}/api/event/${id}`, config);
-      setEvent(res.data[0]);
+      if (res.data.length) {
+        setEvent(res.data[0]);
+      } else {
+        let errs = {};
+        errs.deleted = true;
+        setErrors(errs);
+        setLoading(false);
+      }
       setLoading(false);
     } catch (err) {
       if (err.response) {
@@ -99,6 +106,23 @@ const Event = ({ route }) => {
       setErrors(null);
     }
   }, [event, errors]);
+  useEffect(() => {
+    if (errors) {
+      if (errors.deleted) {
+        toast.current.show("Returned null. Event might've been removed", {
+          icon: <Icon name="alert-circle-outline" size={20} color="white" />,
+          placement: "bottom",
+          type: "danger",
+          duration: 5000,
+          style: { padding: 0 },
+          textStyle: { padding: 0 },
+        });
+      }
+      setTimeout(() => {
+        navigation.goBack();
+      }, 5000);
+    }
+  }, [errors]);
   return (
     <>
       <Toast ref={toast} swipeEnabled={true} />
@@ -123,7 +147,9 @@ const Event = ({ route }) => {
           >
             <Image
               source={{
-                uri: "https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg",
+                uri: event.banner
+                  ? `http://app.addisway.com/public/banners/${event.banner}`
+                  : "https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg",
               }}
               className="w-full h-60 rounded-b-3xl"
             />

@@ -12,7 +12,9 @@ const BannerSlider = ({ data }) => {
     <View className="rounded-xl overflow-hidden bg-gray-700">
       <ImageBackground
         source={{
-          uri: "https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg",
+          uri: data.banner
+            ? `http://app.addisway.com/public/banners/${data.banner}`
+            : "https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg",
         }}
         imageStyle={tw.style("opacity-50")}
       >

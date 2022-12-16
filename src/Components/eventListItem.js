@@ -25,7 +25,9 @@ const EventListItem = ({ event }) => {
         <View>
           <Image
             source={{
-              uri: "https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg",
+              uri: event.banner
+                ? `http://app.addisway.com/public/banners/${event.banner}`
+                : "https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg",
             }}
             className="w-32 h-32"
           />
